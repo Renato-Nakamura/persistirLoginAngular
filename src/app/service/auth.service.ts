@@ -16,14 +16,16 @@ export class AuthService {
 
 
 
-temToken(){
-  if(localStorage.getItem('token')!=''){
-    let to = localStorage.getItem('token')?.toString()
-    if(to!= null){
-      environment.token = to
+  temUser(){
+    if(localStorage.getItem('user')!=''){
+      let to = localStorage.getItem('user')?.toString()
+      if(to!= null){
+        let user = JSON.parse(to)
+        environment.token = user.token
+        environment.foto = user.foto
+      }
     }
   }
-}
 entrar(userLogin:UserLogin):Observable<UserLogin>{
   return this.http.post<UserLogin>('https://edq-ensino.herokuapp.com/usuarios/login', userLogin)
 }

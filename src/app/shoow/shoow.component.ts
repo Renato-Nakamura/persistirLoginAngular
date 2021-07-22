@@ -9,15 +9,17 @@ import { AuthService } from '../service/auth.service';
   styleUrls: ['./shoow.component.css']
 })
 export class ShoowComponent implements OnInit {
-
+  img:string
   constructor(
     private router:Router,
     private auth:AuthService
   ) { }
 
   ngOnInit() {
-    this.auth.temToken()
+    this.auth.temUser()
     console.log(environment.token)
+    console.log(environment.foto)
+    this.img= environment.foto
     if(environment.token == ''){
       this.router.navigate(['/login'])
     }

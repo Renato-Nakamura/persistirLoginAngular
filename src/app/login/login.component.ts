@@ -19,24 +19,25 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.temToken()
+    this.auth.temUser()
   }
 
-  temToken(){
-    if(localStorage.getItem('token')!=''){
-      let to = localStorage.getItem('token')?.toString()
-      if(to!= null){
-        environment.token = to
-      }
-    }
-  }
+  // temToken(){
+  //   if(localStorage.getItem('user')!=''){
+  //     let to = localStorage.getItem('token')?.toString()
+  //     if(to!= null){
+  //       let user = JSON.parse(to)
+  //       environment.token = user.token
+  //     }
+  //   }
+  // }
 
   entrar(){
 
     console.log(this.user)
     this.auth.entrar(this.user).subscribe((resp:UserLogin)=>{
       this.user= resp
-      localStorage.setItem('token', this.user.token)
+      localStorage.setItem('user', JSON.stringify(this.user))
       environment.token = this.user.token
       this.router.navigate(['/show'])
     })
